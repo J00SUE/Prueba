@@ -9,7 +9,10 @@ class Coordinador:
         self.__miModelo = modelo
 
     def recibir_usu(self, n, r):
-        self.__miModelo.verificar(n, r)
+        if self.__miModelo.verificar(n, r):
+            return self.__miModelo
+        else:
+            return "Error"
 
     def recibir_info(self, n, r, f, c, e):
         self.__miModelo.agregarpaciente(n, r, f, c, e)
@@ -20,6 +23,8 @@ def main():
     mi_vista = VentanaPpal()
     mi_controlador = Coordinador(mi_vista, mi_modelo)
     mi_vista.setControlador(mi_controlador)
+    mi_modelo.verificar(mi_vista,mi_vista)
+
     mi_vista.show()
     sys.exit(app.exec_())
 
