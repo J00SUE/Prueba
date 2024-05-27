@@ -51,15 +51,17 @@ class Sistema():
         self.__credenciales = {}
         self.__credenciales["admin"] = "123"
         self.__paciente = {}
+        A = False
 
     def verificar(self, usuario, contraseña):
         if usuario in self.__credenciales:  
             if contraseña == self.__credenciales[usuario]:  
-                return True 
+                A = True
+                return A
             else:
-                return False
+                return A
         else:
-            return False
+            return A
         
     def agregarpaciente(self,n,a,e,c):
         p = Paciente()

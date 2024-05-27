@@ -31,6 +31,9 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="Usuario"/>
+     </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
@@ -38,21 +41,22 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="Contra"/>
+     </item>
      <item row="3" column="1">
-      <widget class="QDialogButtonBox" name="buttonOk">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <widget class="QPushButton" name="Ingreso">
+       <property name="text">
+        <string>Ingreso</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="Usuario"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="Contra"/>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="Salir">
+       <property name="text">
+        <string>Salir</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
