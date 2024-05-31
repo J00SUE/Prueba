@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 from PyQt5.QtGui import QRegExpValidator, QIntValidator
 from PyQt5.QtCore import QRegExp, Qt
 from PyQt5.uic import loadUi
+import json
+import os
 from Modelo import Paciente
 
 class VentanaPpal(QMainWindow):
@@ -71,12 +73,36 @@ class Ingresar(QDialog):
         self.buttonBox.accepted.connect(self.opcionAceptar)
         self.buttonBox.rejected.connect(self.opcionCancelar)
 
+
     def opcionAceptar(self):
-        n = self.Nombre.text()
-        a = self.Apellido.text()
-        c = int(self.CC.text())
-        e = int(self.Edad.text())
-        self.__ventanaPadre.recibir_info(n, a, c, e)
+        n = self.Nombre.text()  # Nombre
+        a = self.Apellido.text()  # Apellido
+        c = int(self.CC.text())  # CC
+        e = int(self.Edad.text())  # Edad
+
+        # Creamos o actualizamos el diccionario data
+        data = {}
+
+        # Si ya existe un archivo JSON, lo cargamos primero
+        try:
+            with open('pacientes.json', 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            # Si el archivo no existe, continuamos con un diccionario vacío
+            pass
+
+        # Añadimos o actualizamos la entrada en el diccionario
+        data[c] = {
+            "Nombre": n,
+            "Apellido": a,
+            "Edad": e
+        }
+
+        # Guardamos el diccionario en un archivo JSON
+        archivo = 'pacientes.json'
+        with open(archivo, 'w') as file:
+            json.dump(data, file, indent=4)
+            
         self.__ventanaPadre.show()
 
     def opcionCancelar(self):

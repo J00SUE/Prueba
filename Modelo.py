@@ -1,20 +1,3 @@
-class Admin():
-    def __init__(self):
-        self.__usuario = ""
-        self.__contraseña = ""
-
-    def aggUsuario(self, usuario):
-        self.__usuario = usuario
-
-    def aggContraseña(self, contraseña):
-        self.__contraseña = contraseña
-
-    def verUsuario(self):
-        return self.__usuario
-    
-    def verContraseña(self):
-        return self.__contraseña
-    
 class Paciente():
     def __init__(self):
         self.__nombre = ""
