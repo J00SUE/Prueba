@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 from PyQt5.QtGui import QRegExpValidator, QIntValidator
 from PyQt5.QtCore import QRegExp, Qt
 from PyQt5.uic import loadUi
@@ -15,16 +15,24 @@ class VentanaPpal(QMainWindow):
         self.__controlador = controlador
 
     def setup(self):
+        self.Ingreso.clicked.connect(self.abrir_ventana_ingresar)
         self.Usuario.setValidator(QRegExpValidator(QRegExp("[a-zA-Z ]+")))
         self.Contra.setValidator(QIntValidator())
-
-        self.Ingreso.clicked.connect(self.abrir_ventana_ingresar)
-        #self.Salir.clicked.connect(self.opcionCancelar)
+        
 
     def abrir_ventana_ingresar(self):
-        ventana_ingreso = VentanaIngreso(self)
-        self.hide()
-        ventana_ingreso.show()
+        a = self.Usuario.text()
+        b = self.Contra.text()
+        if a == "admin":
+            if b == "123":
+                ventana_ingreso = VentanaIngreso(self)
+                self.hide()
+                ventana_ingreso.show()
+            else:
+                QMessageBox.critical(self, "Error", "Usuario o contraseña incorrectos. Por favor, intente de nuevo.")
+
+        else:
+            QMessageBox.critical(self, "Error", "Usuario o contraseña incorrectos. Por favor, intente de nuevo.")
 
     def opcionCancelar(self):
         self.__ventanaPadre.show()

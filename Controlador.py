@@ -23,8 +23,6 @@ def main():
     mi_vista = VentanaPpal()
     mi_controlador = Coordinador(mi_vista, mi_modelo)
     mi_vista.setControlador(mi_controlador)
-    mi_modelo.verificar(mi_vista,mi_vista)
-
     mi_vista.show()
     sys.exit(app.exec_())
 
