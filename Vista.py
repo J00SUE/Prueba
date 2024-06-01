@@ -19,15 +19,14 @@ class VentanaPpal(QMainWindow):
     def setup(self):
         self.Ingreso.clicked.connect(self.abrir_ventana_ingresar)
         self.Salir.clicked.connect(self.opcionCancelar)
-        self.Usuario.setValidator(QRegExpValidator(QRegExp("[a-zA-Z ]+")))
-        self.Contra.setValidator(QIntValidator())
-        
+        self.Usuario.setValidator(QRegExpValidator(QRegExp("[a-zA-Z0-9]+")))
+        self.Contra.setValidator(QRegExpValidator(QRegExp("[a-zA-Z0-9]+")))
 
     def abrir_ventana_ingresar(self):
         a = self.Usuario.text()
         b = self.Contra.text()
-        if a == "admin":
-            if b == "123":
+        if a == "admin123":
+            if b == "contrasena123":
                 ventana_ingreso = VentanaIngreso(self)
                 self.hide()
                 ventana_ingreso.show()
