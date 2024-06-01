@@ -18,6 +18,7 @@ class VentanaPpal(QMainWindow):
 
     def setup(self):
         self.Ingreso.clicked.connect(self.abrir_ventana_ingresar)
+        self.Salir.clicked.connect(self.opcionCancelar)
         self.Usuario.setValidator(QRegExpValidator(QRegExp("[a-zA-Z ]+")))
         self.Contra.setValidator(QIntValidator())
         
@@ -37,7 +38,7 @@ class VentanaPpal(QMainWindow):
             QMessageBox.critical(self, "Error", "Usuario o contraseña incorrectos. Por favor, intente de nuevo.")
 
     def opcionCancelar(self):
-        self.__ventanaPadre.show()
+        QApplication.quit()
 
 class VentanaIngreso(QDialog):
     def __init__(self, ppal=None):
@@ -48,7 +49,7 @@ class VentanaIngreso(QDialog):
 
     def setup(self):
         self.Boton.clicked.connect(self.abrir_ventana_ingreso)
-        #self.Salir.rejected.connect(self.opcionCancelar)
+        self.Salir.clicked.connect(self.opcionCancelar)
 
     def abrir_ventana_ingreso(self):
         ventana_ingreso = Ingresar(self)
@@ -56,6 +57,7 @@ class VentanaIngreso(QDialog):
         ventana_ingreso.show()
 
     def opcionCancelar(self):
+        self.hide()
         self.__ventanaPadre.show()
 
 class Ingresar(QDialog):
@@ -80,18 +82,18 @@ class Ingresar(QDialog):
         c = int(self.CC.text())  # CC
         e = int(self.Edad.text())  # Edad
 
-        # Creamos o actualizamos el diccionario data
+
         data = {}
 
-        # Si ya existe un archivo JSON, lo cargamos primero
+
         try:
             with open('pacientes.json', 'r') as file:
                 data = json.load(file)
         except FileNotFoundError:
-            # Si el archivo no existe, continuamos con un diccionario vacío
+
             pass
 
-        # Añadimos o actualizamos la entrada en el diccionario
+
         data[c] = {
             "Nombre": n,
             "Apellido": a,
@@ -102,7 +104,7 @@ class Ingresar(QDialog):
         archivo = 'pacientes.json'
         with open(archivo, 'w') as file:
             json.dump(data, file, indent=4)
-            
+
         self.__ventanaPadre.show()
 
     def opcionCancelar(self):
