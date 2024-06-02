@@ -52,5 +52,7 @@ class Sistema():
         self.__paciente[p.vercc()] = p
 
     def verificarExiste(self,clave):
-        return clave in self.__paciente
         
+        return clave in self.__paciente
+    def buscar_paciente(self, clave):
+        return self.__pacientes.get(clave)
