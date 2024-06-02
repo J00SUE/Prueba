@@ -109,4 +109,4 @@ class Ingresar(QDialog):
     def opcionCancelar(self):
         self.__ventanaPadre.show()
 
-    
+    #################aaa
