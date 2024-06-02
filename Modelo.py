@@ -1,3 +1,4 @@
+import json
 class Paciente():
     def __init__(self):
         self.__nombre = ""
@@ -54,11 +55,15 @@ class Sistema():
     def verificarExiste(self,clave):
         
         return clave in self.__paciente
-    def buscar_paciente(self, nombre):
-        dict=self.__paciente
-        b=dict.keys()
-        for i in range(len(dict)):
-            j=b[i]
-            if dict[j]["nombre"] == nombre:
-                z=dict[j]
-                return z
+    
+    def buscarPorNombre(self, nombre):
+        try:
+            with open('pacientes.json', 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            return "El archivo pacientes.json no existe."
+
+        resultados = [f"CC: {key}, Nombre: {info['Nombre']}, Apellido: {info['Apellido']}, Edad: {info['Edad']}" 
+                      for key, info in data.items() if info['Nombre'].lower() == nombre.lower()]
+
+        return "\n".join(resultados) if resultados else "No se encontró ningún paciente con ese nombre."

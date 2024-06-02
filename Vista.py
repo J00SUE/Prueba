@@ -5,6 +5,8 @@ from PyQt5.uic import loadUi
 import json
 import os
 from Modelo import Paciente
+from Modelo import Sistema
+S = Sistema()
 
 class VentanaPpal(QMainWindow):
     def __init__(self, ppal=None):
@@ -71,8 +73,10 @@ class Ingresar(QDialog):
         self.Apellido.setValidator(QRegExpValidator(QRegExp("[a-zA-Z ]+")))
         self.CC.setValidator(QIntValidator())
         self.Edad.setValidator(QIntValidator())
+        self.Nombre_b.setValidator(QRegExpValidator(QRegExp("[a-zA-Z ]+")))
         self.buttonBox.accepted.connect(self.opcionAceptar)
         self.buttonBox.rejected.connect(self.opcionCancelar)
+        self.Buscar.clicked.connect(self.buscar)
 
 
     def opcionAceptar(self):
@@ -80,6 +84,8 @@ class Ingresar(QDialog):
         a = self.Apellido.text()  # Apellido
         c = int(self.CC.text())  # CC
         e = int(self.Edad.text())  # Edad
+
+
 
 
         data = {}
@@ -106,7 +112,12 @@ class Ingresar(QDialog):
 
         self.__ventanaPadre.show()
 
+    def buscar(self):
+    
+        Name = self.Nombre_b.text()
+        T = S.buscarPorNombre(Name)
+        self.label_5.setText(T)
+
+
     def opcionCancelar(self):
         self.__ventanaPadre.show()
-
-    #################aaa
