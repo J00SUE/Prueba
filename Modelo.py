@@ -54,5 +54,11 @@ class Sistema():
     def verificarExiste(self,clave):
         
         return clave in self.__paciente
-    def buscar_paciente(self, clave):
-        return self.__pacientes.get(clave)
+    def buscar_paciente(self, nombre):
+        dict=self.__paciente
+        b=dict.keys()
+        for i in range(len(dict)):
+            j=b[i]
+            if dict[j]["nombre"] == nombre:
+                z=dict[j]
+                return z
